@@ -1,0 +1,12 @@
+/Users/alexchau/Documents/Personal/monkey/Monkey.Interpreter/bin/Debug/net6.0/Monkey.Interpreter.deps.json
+/Users/alexchau/Documents/Personal/monkey/Monkey.Interpreter/bin/Debug/net6.0/Monkey.Interpreter.dll
+/Users/alexchau/Documents/Personal/monkey/Monkey.Interpreter/bin/Debug/net6.0/Monkey.Interpreter.pdb
+/Users/alexchau/Documents/Personal/monkey/Monkey.Interpreter/obj/Debug/net6.0/Monkey.Interpreter.csproj.AssemblyReference.cache
+/Users/alexchau/Documents/Personal/monkey/Monkey.Interpreter/obj/Debug/net6.0/Monkey.Interpreter.GeneratedMSBuildEditorConfig.editorconfig
+/Users/alexchau/Documents/Personal/monkey/Monkey.Interpreter/obj/Debug/net6.0/Monkey.Interpreter.AssemblyInfoInputs.cache
+/Users/alexchau/Documents/Personal/monkey/Monkey.Interpreter/obj/Debug/net6.0/Monkey.Interpreter.AssemblyInfo.cs
+/Users/alexchau/Documents/Personal/monkey/Monkey.Interpreter/obj/Debug/net6.0/Monkey.Interpreter.csproj.CoreCompileInputs.cache
+/Users/alexchau/Documents/Personal/monkey/Monkey.Interpreter/obj/Debug/net6.0/Monkey.Interpreter.dll
+/Users/alexchau/Documents/Personal/monkey/Monkey.Interpreter/obj/Debug/net6.0/refint/Monkey.Interpreter.dll
+/Users/alexchau/Documents/Personal/monkey/Monkey.Interpreter/obj/Debug/net6.0/Monkey.Interpreter.pdb
+/Users/alexchau/Documents/Personal/monkey/Monkey.Interpreter/obj/Debug/net6.0/ref/Monkey.Interpreter.dll
