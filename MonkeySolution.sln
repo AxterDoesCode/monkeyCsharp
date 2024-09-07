@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monkey", "Monkey\Monkey.csproj", "{41099AA3-5C3D-497E-A44C-4601F15273A9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonkeyInterpreter", "MonkeyInterpreter\MonkeyInterpreter.csproj", "{2E920842-2118-4594-A024-4284E1BC9258}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monkey.Main", "Monkey.Main\Monkey.Main.csproj", "{223A7F34-BA1D-4BCA-8E32-26AE5163F3C4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monkey.Interpreter", "Monkey.Interpreter\Monkey.Interpreter.csproj", "{A3E8F69F-499B-4848-BE51-04B0FCFD2B7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monkey.Ast", "Monkey.Ast\Monkey.Ast.csproj", "{A7F5CA56-8B58-4993-A5FE-352211F6E696}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monkey.Parser", "Monkey.Parser\Monkey.Parser.csproj", "{8AB98542-C53A-46C8-BF89-43EF2A954A97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,5 +36,13 @@ Global
 		{A3E8F69F-499B-4848-BE51-04B0FCFD2B7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3E8F69F-499B-4848-BE51-04B0FCFD2B7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3E8F69F-499B-4848-BE51-04B0FCFD2B7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7F5CA56-8B58-4993-A5FE-352211F6E696}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7F5CA56-8B58-4993-A5FE-352211F6E696}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7F5CA56-8B58-4993-A5FE-352211F6E696}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7F5CA56-8B58-4993-A5FE-352211F6E696}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AB98542-C53A-46C8-BF89-43EF2A954A97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AB98542-C53A-46C8-BF89-43EF2A954A97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AB98542-C53A-46C8-BF89-43EF2A954A97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AB98542-C53A-46C8-BF89-43EF2A954A97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
