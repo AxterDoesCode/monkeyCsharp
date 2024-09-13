@@ -1,6 +1,7 @@
 ﻿using Monkey.Interpreter.Lexing;
 using Monkey.Ast;
 using LanguageExt;
+using LanguageExt.Common;
 namespace Monkey.Parser;
 public class Parser
 {
@@ -16,16 +17,21 @@ public class Parser
     Token curToken;
     Token peekToken;
     List<Error> errors { get; }
-    Dictionary<string, Func<IExpression>> prefixParseFns;
+    Dictionary<string, Func<Option<IExpression>>> prefixParseFns;
     Dictionary<string, Func<IExpression, IExpression>> infixParseFns;
 
     public Parser(Lexer l)
     {
         _lexer = l;
         errors = new List<Error> { };
+        prefixParseFns = new Dictionary<string, Func<Option<IExpression>>> { };
+        infixParseFns = new Dictionary<string, Func<IExpression, IExpression>> { };
         // Call NextToken twice to populate curToken and peekToken fields
         NextToken();
         NextToken();
+
+        RegisterPrefix(Token.IDENT, ParseIdentifier);
+        RegisterPrefix(Token.BANG, ParsePre)
     }
 
     private void NextToken()
@@ -63,7 +69,11 @@ public class Parser
     private Option<IStatement> ParseExpressionStatement()
     {
         var stmt = new ExpressionStatement(curToken);
-        stmt.Expression = ParseExpression(LOWEST);
+        // TODO: This feels so illegal but for now it'll do I guess
+        stmt.Expression = ParseExpression(LOWEST).MatchUnsafe(
+                Some: x => x,
+                None: (IExpression?)null
+                );
 
         if (PeekTokenIs(Token.SEMICOLON))
         {
@@ -109,13 +119,19 @@ public class Parser
         return Option<IStatement>.Some(stmt);
     }
 
+    private void NoPrefixParseFnError(string tokenType)
+    {
+        errors.Add(new Error($"No prefix parse fn for {tokenType} found"));
+    }
+
     private Option<IExpression> ParseExpression(int precedence)
     {
         var prefix = prefixParseFns.TryGetValue(Key: curToken.Type);
         return prefix.Match(
-                None: Option<IExpression>.None,
-                Some: prefixFn => Option<IExpression>.Some(prefixFn())
-                );
+                Some: prefixFn => prefixFn().Match(
+                        Some: x => Option<IExpression>.Some(x),
+                        None: () => { NoPrefixParseFnError(curToken.Type); return Option<IExpression>.None; }),
+                None: () => { NoPrefixParseFnError(curToken.Type); return Option<IExpression>.None; });
     }
 
     private bool CurTokenIs(string tokenType)
@@ -149,7 +165,7 @@ public class Parser
         errors.Add(newErr);
     }
 
-    private void RegisterPrefix(string tokenType, Func<IExpression> fn)
+    private void RegisterPrefix(string tokenType, Func<Option<IExpression>> fn)
     {
         prefixParseFns.Add(tokenType, fn);
     }
@@ -157,5 +173,33 @@ public class Parser
     private void RegisterInfix(string tokenType, Func<IExpression, IExpression> fn)
     {
         infixParseFns.Add(tokenType, fn);
+    }
+
+    private Option<IExpression> ParseIdentifier()
+    {
+        return new Identifier(curToken, curToken.Literal);
+    }
+
+    private Option<IExpression> ParseIntegerLiteral()
+    {
+        var lit = new IntegerLiteral(curToken);
+        if (!long.TryParse(curToken.Literal, out long Out))
+        {
+            errors.Add(new Error("Failed to parse integer"));
+            return Option<IExpression>.None;
+        }
+        lit.Value = Out;
+        return lit;
+    }
+
+    private Option<IExpression> ParsePrefixExpression()
+    {
+        var expression = new PrefixExpression(curToken, curToken.Literal);
+        NextToken();
+        ParseExpression(PREFIX).Match(
+                Some: x => { expression.Right = x; return; },
+                None: () => { return; }
+                );
+        return expression;
     }
 }

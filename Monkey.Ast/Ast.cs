@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Linq.Expressions;
+using System.Text;
 using Monkey.Interpreter.Lexing;
 
 namespace Monkey.Ast;
@@ -125,16 +126,52 @@ public class ExpressionStatement : IStatement
 {
     public Token Token; // The first token of the expression
     public IExpression Expression;
-    public ExpressionStatement(Token tok) {
+    public ExpressionStatement(Token tok)
+    {
         Token = tok;
     }
 
     public void StatementNode() { }
     public string TokenLiteral() { return Token.Literal; }
-    public string String() {
-        if (Expression != null) {
+    public string String()
+    {
+        if (Expression != null)
+        {
             return Expression.String();
         }
         return "";
+    }
+}
+
+public class IntegerLiteral : IExpression
+{
+    public Token Token;
+    public long Value { get; set; }
+
+    public IntegerLiteral(Token tok)
+    {
+        Token = tok;
+    }
+    public void ExpressionNode() { }
+    public string TokenLiteral() { return Token.Literal; }
+    public string String() { return Token.Literal; }
+}
+
+public class PrefixExpression : IExpression
+{
+    public Token Token;
+    public string Operator;
+    public IExpression Right {get; set;}
+
+    public PrefixExpression(Token tok, string op) {
+        Token = tok;
+        Operator = op;
+    }
+
+    public void ExpressionNode() { }
+    public string TokenLiteral() { return Token.Literal; }
+    public string String()
+    {
+        return $"({Operator}{Right.String()})";
     }
 }
