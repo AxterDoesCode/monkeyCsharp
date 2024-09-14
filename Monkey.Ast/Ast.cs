@@ -161,9 +161,10 @@ public class PrefixExpression : IExpression
 {
     public Token Token;
     public string Operator;
-    public IExpression Right {get; set;}
+    public IExpression Right { get; set; }
 
-    public PrefixExpression(Token tok, string op) {
+    public PrefixExpression(Token tok, string op)
+    {
         Token = tok;
         Operator = op;
     }
@@ -173,5 +174,27 @@ public class PrefixExpression : IExpression
     public string String()
     {
         return $"({Operator}{Right.String()})";
+    }
+}
+
+public class InfixExpression : IExpression
+{
+    public Token Token;
+    public string Operator;
+    public IExpression Right { get; set; }
+    public IExpression Left { get; set; }
+
+    public InfixExpression(Token tok, string op, IExpression left, IExpression right) {
+        Token = tok;
+        Operator = op;
+        Left = left;
+        Right = right;
+    }
+
+    public void ExpressionNode() { }
+    public string TokenLiteral() { return Token.Literal; }
+    public string String()
+    {
+        return $"({Left.String()}{Operator}{Right.String()})";
     }
 }
