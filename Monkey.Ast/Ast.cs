@@ -162,7 +162,13 @@ public class PrefixExpression : IExpression
 {
     public Token Token;
     public string Operator;
-    public IExpression Right { get; set; }
+    public IExpression? Right { get; set; }
+    
+    public PrefixExpression(Token tok, string op)
+    {
+        Token = tok;
+        Operator = op;
+    }
 
     public PrefixExpression(Token tok, string op, IExpression right)
     {
@@ -175,7 +181,8 @@ public class PrefixExpression : IExpression
     public string TokenLiteral() { return Token.Literal; }
     public string String()
     {
-        return $"({Operator}{Right.String()})";
+        string rightStr = Right != null ? Right.String() : "";
+        return $"({Operator}{rightStr})";
     }
 }
 
@@ -183,8 +190,14 @@ public class InfixExpression : IExpression
 {
     public Token Token;
     public string Operator;
-    public IExpression Right { get; set; }
     public IExpression Left { get; set; }
+    public IExpression? Right { get; set; }
+    
+    public InfixExpression(Token tok, string op, IExpression left) {
+        Token = tok;
+        Operator = op;
+        Left = left;
+    }
 
     public InfixExpression(Token tok, string op, IExpression left, IExpression right) {
         Token = tok;
@@ -197,6 +210,7 @@ public class InfixExpression : IExpression
     public string TokenLiteral() { return Token.Literal; }
     public string String()
     {
-        return $"({Left.String()}{Operator}{Right.String()})";
+        string rightStr = Right != null ? Right.String() : "";
+        return $"({Left.String()}{Operator}{rightStr})";
     }
 }

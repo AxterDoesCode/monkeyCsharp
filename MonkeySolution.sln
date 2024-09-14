@@ -9,7 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monkey.Interpreter", "Monke
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monkey.Ast", "Monkey.Ast\Monkey.Ast.csproj", "{A7F5CA56-8B58-4993-A5FE-352211F6E696}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monkey.Parser", "Monkey.Parser\Monkey.Parser.csproj", "{8AB98542-C53A-46C8-BF89-43EF2A954A97}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monkey.Parsing", "Monkey.Parsing\Monkey.Parsing.csproj", "{8AB98542-C53A-46C8-BF89-43EF2A954A97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monkey.Repl", "Monkey.Repl\Monkey.Repl.csproj", "{117BBB6E-4364-48AE-AEA1-FA203CE5B822}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,5 +46,9 @@ Global
 		{8AB98542-C53A-46C8-BF89-43EF2A954A97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AB98542-C53A-46C8-BF89-43EF2A954A97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8AB98542-C53A-46C8-BF89-43EF2A954A97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{117BBB6E-4364-48AE-AEA1-FA203CE5B822}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{117BBB6E-4364-48AE-AEA1-FA203CE5B822}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{117BBB6E-4364-48AE-AEA1-FA203CE5B822}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{117BBB6E-4364-48AE-AEA1-FA203CE5B822}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

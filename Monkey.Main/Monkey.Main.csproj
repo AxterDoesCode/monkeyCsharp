@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\Monkey.Interpreter\Monkey.Interpreter.csproj" />
+    <ProjectReference Include="..\Monkey.Repl\Monkey.Repl.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

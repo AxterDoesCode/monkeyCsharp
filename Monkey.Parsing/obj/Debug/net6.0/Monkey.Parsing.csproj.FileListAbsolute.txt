@@ -1,0 +1,17 @@
+/Users/alexchau/Documents/Personal/monkey/Monkey.Parsing/bin/Debug/net6.0/Monkey.Parsing.deps.json
+/Users/alexchau/Documents/Personal/monkey/Monkey.Parsing/bin/Debug/net6.0/Monkey.Parsing.dll
+/Users/alexchau/Documents/Personal/monkey/Monkey.Parsing/bin/Debug/net6.0/Monkey.Parsing.pdb
+/Users/alexchau/Documents/Personal/monkey/Monkey.Parsing/bin/Debug/net6.0/Monkey.Ast.dll
+/Users/alexchau/Documents/Personal/monkey/Monkey.Parsing/bin/Debug/net6.0/Monkey.Interpreter.dll
+/Users/alexchau/Documents/Personal/monkey/Monkey.Parsing/bin/Debug/net6.0/Monkey.Interpreter.pdb
+/Users/alexchau/Documents/Personal/monkey/Monkey.Parsing/bin/Debug/net6.0/Monkey.Ast.pdb
+/Users/alexchau/Documents/Personal/monkey/Monkey.Parsing/obj/Debug/net6.0/Monkey.Parsing.csproj.AssemblyReference.cache
+/Users/alexchau/Documents/Personal/monkey/Monkey.Parsing/obj/Debug/net6.0/Monkey.Parsing.GeneratedMSBuildEditorConfig.editorconfig
+/Users/alexchau/Documents/Personal/monkey/Monkey.Parsing/obj/Debug/net6.0/Monkey.Parsing.AssemblyInfoInputs.cache
+/Users/alexchau/Documents/Personal/monkey/Monkey.Parsing/obj/Debug/net6.0/Monkey.Parsing.AssemblyInfo.cs
+/Users/alexchau/Documents/Personal/monkey/Monkey.Parsing/obj/Debug/net6.0/Monkey.Parsing.csproj.CoreCompileInputs.cache
+/Users/alexchau/Documents/Personal/monkey/Monkey.Parsing/obj/Debug/net6.0/Monkey.Parsing.csproj.CopyComplete
+/Users/alexchau/Documents/Personal/monkey/Monkey.Parsing/obj/Debug/net6.0/Monkey.Parsing.dll
+/Users/alexchau/Documents/Personal/monkey/Monkey.Parsing/obj/Debug/net6.0/refint/Monkey.Parsing.dll
+/Users/alexchau/Documents/Personal/monkey/Monkey.Parsing/obj/Debug/net6.0/Monkey.Parsing.pdb
+/Users/alexchau/Documents/Personal/monkey/Monkey.Parsing/obj/Debug/net6.0/ref/Monkey.Parsing.dll

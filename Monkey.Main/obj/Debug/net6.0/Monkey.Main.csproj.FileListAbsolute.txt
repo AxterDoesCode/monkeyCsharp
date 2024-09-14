@@ -16,3 +16,11 @@
 /Users/alexchau/Documents/Personal/monkey/Monkey.Main/bin/Debug/net6.0/Monkey.Interpreter.dll
 /Users/alexchau/Documents/Personal/monkey/Monkey.Main/bin/Debug/net6.0/Monkey.Interpreter.pdb
 /Users/alexchau/Documents/Personal/monkey/Monkey.Main/obj/Debug/net6.0/Monkey.Main.csproj.CopyComplete
+/Users/alexchau/Documents/Personal/monkey/Monkey.Main/bin/Debug/net6.0/LanguageExt.Core.dll
+/Users/alexchau/Documents/Personal/monkey/Monkey.Main/bin/Debug/net6.0/Microsoft.Bcl.AsyncInterfaces.dll
+/Users/alexchau/Documents/Personal/monkey/Monkey.Main/bin/Debug/net6.0/Monkey.Ast.dll
+/Users/alexchau/Documents/Personal/monkey/Monkey.Main/bin/Debug/net6.0/Monkey.Parsing.dll
+/Users/alexchau/Documents/Personal/monkey/Monkey.Main/bin/Debug/net6.0/Monkey.Repl.dll
+/Users/alexchau/Documents/Personal/monkey/Monkey.Main/bin/Debug/net6.0/Monkey.Repl.pdb
+/Users/alexchau/Documents/Personal/monkey/Monkey.Main/bin/Debug/net6.0/Monkey.Ast.pdb
+/Users/alexchau/Documents/Personal/monkey/Monkey.Main/bin/Debug/net6.0/Monkey.Parsing.pdb
