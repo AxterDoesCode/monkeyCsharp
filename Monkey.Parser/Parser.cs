@@ -40,6 +40,7 @@ public class Parser
         NextToken();
 
         RegisterPrefix(Token.IDENT, ParseIdentifier);
+        RegisterPrefix(Token.INT, ParseIntegerLiteral);
         RegisterPrefix(Token.BANG, ParsePrefixExpression);
         RegisterPrefix(Token.MINUS, ParsePrefixExpression);
 
@@ -89,6 +90,7 @@ public class Parser
                 Some: x => program.Statements.Add(x),
                 None: () => Console.WriteLine("Error parsing statement") // Probably remove this
             );
+
             NextToken();
         }
         return program;
@@ -170,9 +172,12 @@ public class Parser
             None: () => { leftExp = Option<IExpression>.None; NoPrefixParseFnError(curToken.Type); }
         );
 
+        if (leftExp.IsNone) { return leftExp; }
+
         while (!PeekTokenIs(Token.SEMICOLON) && precedence < PeekPrecedence())
         {
             var infix = infixParseFns.TryGetValue(Key: peekToken.Type);
+            if (infix.IsNone) { return leftExp; }
             infix.Match(
                 Some: x => { leftExp = x(leftExp); },
                 None: () => { }
@@ -228,25 +233,25 @@ public class Parser
         return new Identifier(curToken, curToken.Literal);
     }
 
-    private IExpression ParseIntegerLiteral()
+    private Option<IExpression> ParseIntegerLiteral()
     {
-        var lit = new IntegerLiteral(curToken);
+        Option<IExpression> lit = Option<IExpression>.None;
         if (!long.TryParse(curToken.Literal, out long Out))
         {
             errors.Add(new Error("Failed to parse integer"));
             return lit;
         }
-        lit.Value = Out;
+        lit = new IntegerLiteral(curToken, Out);
         return lit;
     }
 
     private Option<IExpression> ParsePrefixExpression()
     {
-        var expression = new PrefixExpression(curToken, curToken.Literal);
+        Option<IExpression> expression = Option<IExpression>.None;
         NextToken();
         ParseExpression(PREFIX).Match(
-                Some: x => { expression.Right = x; return; },
-                None: () => { return; }
+                Some: r => expression = new PrefixExpression(curToken, curToken.Literal, r),
+                None: () => { }
                 );
         return expression;
     }

@@ -148,9 +148,10 @@ public class IntegerLiteral : IExpression
     public Token Token;
     public long Value { get; set; }
 
-    public IntegerLiteral(Token tok)
+    public IntegerLiteral(Token tok, long val)
     {
         Token = tok;
+        Value = val;
     }
     public void ExpressionNode() { }
     public string TokenLiteral() { return Token.Literal; }
@@ -163,10 +164,11 @@ public class PrefixExpression : IExpression
     public string Operator;
     public IExpression Right { get; set; }
 
-    public PrefixExpression(Token tok, string op)
+    public PrefixExpression(Token tok, string op, IExpression right)
     {
         Token = tok;
         Operator = op;
+        Right = right;
     }
 
     public void ExpressionNode() { }
