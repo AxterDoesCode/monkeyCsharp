@@ -110,7 +110,6 @@ public class Parser
                                     {
                                         return Option<IExpression>.None;
                                     }
-                                    return expression;
                                     return ParseBlockStatement().Match
                                     (
                                         Some: alternative => { expression.Alternative = alternative; return expression; },
