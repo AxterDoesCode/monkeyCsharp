@@ -141,6 +141,8 @@ public class Parser
         {
             return Option<BlockStatement>.None;
         }
+
+        // TODO: Maybe add a check for RBrace here;
         block.Statements = statements;
         return block;
     }

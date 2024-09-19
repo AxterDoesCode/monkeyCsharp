@@ -275,7 +275,7 @@ public class IfExpression : IExpression
     {
 
         var Out = new StringBuilder();
-        Out.Append("if");
+        Out.Append("if ");
         Out.Append(Condition.String());
         Out.Append(' ');
         Out.Append(Consequence.String());
