@@ -179,7 +179,7 @@ public class Parser
             if (infix.IsNone) { return leftExp; }
             infix.Match(
                 Some: x => { NextToken(); leftExp = x(leftExp); },
-                None: () => { }
+                None: () => { } // This will never happen btw
             );
         }
 
