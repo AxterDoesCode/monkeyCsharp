@@ -1,6 +1,7 @@
 ﻿using Monkey.Interpreter.Lexing;
 using Monkey.Ast;
 using LanguageExt;
+using LanguageExt.SomeHelp;
 namespace Monkey.Parsing;
 public class Parser
 {
@@ -41,8 +42,12 @@ public class Parser
 
         RegisterPrefix(Token.IDENT, ParseIdentifier);
         RegisterPrefix(Token.INT, ParseIntegerLiteral);
+        RegisterPrefix(Token.TRUE, ParseBoolean);
+        RegisterPrefix(Token.FALSE, ParseBoolean);
         RegisterPrefix(Token.BANG, ParsePrefixExpression);
         RegisterPrefix(Token.MINUS, ParsePrefixExpression);
+        RegisterPrefix(Token.LPAREN, ParseGroupedExpression);
+        RegisterPrefix(Token.IF, ParseIfExpression);
 
         RegisterInfix(Token.PLUS, ParseInfixExpression);
         RegisterInfix(Token.MINUS, ParseInfixExpression);
@@ -52,6 +57,98 @@ public class Parser
         RegisterInfix(Token.NOT_EQ, ParseInfixExpression);
         RegisterInfix(Token.LT, ParseInfixExpression);
         RegisterInfix(Token.GT, ParseInfixExpression);
+    }
+
+    private Option<IExpression> ParseGroupedExpression()
+    {
+        NextToken();
+        var exp = ParseExpression(LOWEST);
+        if (!ExpectPeek(Token.RPAREN))
+        {
+            return Option<IExpression>.None;
+        }
+        return exp;
+    }
+
+    private Option<IExpression> ParseIfExpression()
+    {
+        var expression = new IfExpression(curToken);
+        if (!ExpectPeek(Token.LPAREN))
+        {
+            return Option<IExpression>.None;
+        }
+
+        NextToken();
+        return ParseExpression(LOWEST).Match
+            (
+                None: Option<IExpression>.None,
+                Some: condition =>
+                {
+                    expression.Condition = condition;
+
+                    if (!ExpectPeek(Token.RPAREN))
+                    {
+                        return Option<IExpression>.None;
+                    }
+
+                    if (!ExpectPeek(Token.LBRACE))
+                    {
+                        return Option<IExpression>.None;
+                    }
+
+                    return ParseBlockStatement().Match
+                        (
+                            None: Option<IExpression>.None,
+                            Some: consequence =>
+                            {
+                                expression.Consequence = consequence;
+
+                                if (PeekTokenIs(Token.ELSE))
+                                {
+                                    NextToken();
+                                    if (!ExpectPeek(Token.LBRACE))
+                                    {
+                                        return Option<IExpression>.None;
+                                    }
+                                    return expression;
+                                    return ParseBlockStatement().Match
+                                    (
+                                        Some: alternative => { expression.Alternative = alternative; return expression; },
+                                        None: Option<IExpression>.None
+                                    );
+                                }
+                                return expression;
+                            }
+                        );
+                }
+            );
+    }
+
+    private Option<BlockStatement> ParseBlockStatement()
+    {
+        var block = new BlockStatement(curToken);
+        var statements = new List<IStatement>();
+
+        NextToken();
+        while (!CurTokenIs(Token.RBRACE) && !CurTokenIs(Token.EOF))
+        {
+            ParseStatement().Match(
+                None: () => { },
+                Some: stmt => statements.Add(stmt)
+            );
+            NextToken();
+        }
+        if (!statements.Any())
+        {
+            return Option<BlockStatement>.None;
+        }
+        block.Statements = statements;
+        return block;
+    }
+
+    private Option<IExpression> ParseBoolean()
+    {
+        return new Ast.Boolean(curToken, CurTokenIs(Token.TRUE));
     }
 
     private int PeekPrecedence()
@@ -108,16 +205,20 @@ public class Parser
     private Option<IStatement> ParseExpressionStatement()
     {
         var stmt = new ExpressionStatement(curToken);
-        ParseExpression(LOWEST).Match(
-                Some: x => stmt.Expression = x,
-                None: () => { }
-            );
 
-        if (PeekTokenIs(Token.SEMICOLON))
-        {
-            NextToken();
-        }
-        return stmt;
+        return ParseExpression(LOWEST).Match(
+            None: Option<IStatement>.None,
+            Some: x =>
+                {
+                    stmt.Expression = x;
+
+                    if (PeekTokenIs(Token.SEMICOLON))
+                    {
+                        NextToken();
+                    }
+                    return stmt;
+                }
+            );
     }
 
     private Option<IStatement> ParseReturnStatement()

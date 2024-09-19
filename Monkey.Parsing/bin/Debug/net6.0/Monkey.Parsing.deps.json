@@ -219,6 +219,7 @@
       "System.ValueTuple/4.5.0": {},
       "Monkey.Ast/1.0.0": {
         "dependencies": {
+          "LanguageExt.Core": "4.4.9",
           "Monkey.Interpreter": "1.0.0"
         },
         "runtime": {

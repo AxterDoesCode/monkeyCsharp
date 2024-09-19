@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using System.Text;
+using LanguageExt;
 using Monkey.Interpreter.Lexing;
 
 namespace Monkey.Ast;
@@ -125,7 +126,7 @@ public class ReturnStatement : IStatement
 public class ExpressionStatement : IStatement
 {
     public Token Token; // The first token of the expression
-    public IExpression Expression;
+    public IExpression Expression { get; set; }
     public ExpressionStatement(Token tok)
     {
         Token = tok;
@@ -140,6 +141,29 @@ public class ExpressionStatement : IStatement
             return Expression.String();
         }
         return "";
+    }
+}
+
+public class BlockStatement : IStatement
+{
+    public Token Token;
+    public List<IStatement> Statements { get; set; }
+
+    public BlockStatement(Token tok)
+    {
+        Token = tok;
+    }
+
+    public void StatementNode() { }
+    public string TokenLiteral() { return Token.Literal; }
+    public string String()
+    {
+        var Out = new StringBuilder();
+        foreach (IStatement s in Statements)
+        {
+            Out.Append(s.String());
+        }
+        return Out.ToString();
     }
 }
 
@@ -163,7 +187,7 @@ public class PrefixExpression : IExpression
     public Token Token;
     public string Operator;
     public IExpression? Right { get; set; }
-    
+
     public PrefixExpression(Token tok, string op)
     {
         Token = tok;
@@ -192,14 +216,16 @@ public class InfixExpression : IExpression
     public string Operator;
     public IExpression Left { get; set; }
     public IExpression? Right { get; set; }
-    
-    public InfixExpression(Token tok, string op, IExpression left) {
+
+    public InfixExpression(Token tok, string op, IExpression left)
+    {
         Token = tok;
         Operator = op;
         Left = left;
     }
 
-    public InfixExpression(Token tok, string op, IExpression left, IExpression right) {
+    public InfixExpression(Token tok, string op, IExpression left, IExpression right)
+    {
         Token = tok;
         Operator = op;
         Left = left;
@@ -212,5 +238,55 @@ public class InfixExpression : IExpression
     {
         string rightStr = Right != null ? Right.String() : "";
         return $"({Left.String()}{Operator}{rightStr})";
+    }
+}
+
+public class Boolean : IExpression
+{
+    public Token Token;
+    public bool Value;
+
+    public Boolean(Token tok, bool value)
+    {
+        Token = tok;
+        Value = value;
+    }
+
+    public void ExpressionNode() { }
+    public string TokenLiteral() { return Token.Literal; }
+    public string String() { return Token.Literal; }
+}
+
+public class IfExpression : IExpression
+{
+    public Token Token;
+    public IExpression Condition { get; set; }
+    public BlockStatement Consequence { get; set; }
+    public Option<BlockStatement> Alternative = Option<BlockStatement>.None;
+
+    public IfExpression(Token tok)
+    {
+        Token = tok;
+    }
+
+    public void ExpressionNode() { }
+    public string TokenLiteral() { return Token.Literal; }
+    public string String()
+    {
+
+        var Out = new StringBuilder();
+        Out.Append("if");
+        Out.Append(Condition.String());
+        Out.Append(' ');
+        Out.Append(Consequence.String());
+        Alternative.Match(
+            Some: x =>
+            {
+                Out.Append(" else ");
+                Out.Append(x.String());
+            },
+            None: () => { Out.Append(""); }
+            );
+        return Out.ToString();
     }
 }

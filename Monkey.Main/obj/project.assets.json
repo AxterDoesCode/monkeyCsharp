@@ -425,6 +425,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "LanguageExt.Core": "4.4.9",
           "Monkey.Interpreter": "1.0.0"
         },
         "compile": {
