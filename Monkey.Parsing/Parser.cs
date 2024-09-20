@@ -48,6 +48,7 @@ public class Parser
         RegisterPrefix(Token.MINUS, ParsePrefixExpression);
         RegisterPrefix(Token.LPAREN, ParseGroupedExpression);
         RegisterPrefix(Token.IF, ParseIfExpression);
+        RegisterPrefix(Token.FUNCTION, ParseFunctionLiteral);
 
         RegisterInfix(Token.PLUS, ParseInfixExpression);
         RegisterInfix(Token.MINUS, ParseInfixExpression);
@@ -68,6 +69,60 @@ public class Parser
             return Option<IExpression>.None;
         }
         return exp;
+    }
+
+    private Option<IExpression> ParseFunctionLiteral()
+    {
+        var literal = new FunctionLiteral(curToken);
+
+        if (!ExpectPeek(Token.LPAREN))
+        {
+            return Option<IExpression>.None;
+        }
+
+        return ParseFunctionParameters().Match(
+            None: Option<IExpression>.None,
+            Some: x =>
+            {
+                literal.Parameters = x.ToArray();
+                if (!ExpectPeek(Token.LBRACE))
+                {
+                    return Option<IExpression>.None;
+                }
+                return ParseBlockStatement().Match(
+                    None: Option<IExpression>.None,
+                    Some: x => { literal.Body = x; return literal; }
+                );
+            }
+        );
+    }
+
+    private Option<List<Identifier>> ParseFunctionParameters()
+    {
+        var identifiers = new List<Identifier>();
+        if (PeekTokenIs(Token.RPAREN))
+        {
+            NextToken();
+            return identifiers;
+        }
+
+        NextToken();
+        var ident = new Identifier(curToken, curToken.Literal);
+        identifiers.Add(ident);
+
+        while (PeekTokenIs(Token.COMMA))
+        {
+            NextToken();
+            NextToken();
+            ident = new Identifier(curToken, curToken.Literal);
+            identifiers.Add(ident);
+        }
+
+        if (!ExpectPeek(Token.RPAREN))
+        {
+            return Option<List<Identifier>>.None;
+        }
+        return identifiers;
     }
 
     private Option<IExpression> ParseIfExpression()
@@ -137,11 +192,12 @@ public class Parser
             );
             NextToken();
         }
-        if (!statements.Any())
-        {
-            return Option<BlockStatement>.None;
-        }
-
+        // Below is commented out cos then empty functions break
+        // if (!statements.Any())
+        // {
+        //     return Option<BlockStatement>.None;
+        // }
+        
         // TODO: Maybe add a check for RBrace here;
         block.Statements = statements;
         return block;

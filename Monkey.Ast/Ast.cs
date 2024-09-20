@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 using System.Text;
 using LanguageExt;
+using Microsoft.VisualBasic;
 using Monkey.Interpreter.Lexing;
 
 namespace Monkey.Ast;
@@ -287,6 +288,31 @@ public class IfExpression : IExpression
             },
             None: () => { Out.Append(""); }
             );
+        return Out.ToString();
+    }
+}
+
+public class FunctionLiteral : IExpression
+{
+    public Token Token;
+    public Identifier[] Parameters { get; set; }
+    public BlockStatement Body { get; set; }
+
+    public FunctionLiteral(Token tok)
+    {
+        Token = tok;
+    }
+
+    public void ExpressionNode() { }
+    public string TokenLiteral() { return Token.Literal; }
+    public string String()
+    {
+        var Out = new StringBuilder();
+        Out.Append(TokenLiteral());
+        Out.Append('(');
+        Out.Append(Strings.Join(Parameters, ","));
+        Out.Append(')');
+        Out.Append(Body.String());
         return Out.ToString();
     }
 }

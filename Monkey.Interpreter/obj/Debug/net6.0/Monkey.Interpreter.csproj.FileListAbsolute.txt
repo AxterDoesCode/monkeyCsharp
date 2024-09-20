@@ -10,3 +10,15 @@
 /Users/alexchau/Documents/Personal/monkey/Monkey.Interpreter/obj/Debug/net6.0/refint/Monkey.Interpreter.dll
 /Users/alexchau/Documents/Personal/monkey/Monkey.Interpreter/obj/Debug/net6.0/Monkey.Interpreter.pdb
 /Users/alexchau/Documents/Personal/monkey/Monkey.Interpreter/obj/Debug/net6.0/ref/Monkey.Interpreter.dll
+/home/axtr/Documents/monkeyCsharp/Monkey.Interpreter/bin/Debug/net6.0/Monkey.Interpreter.deps.json
+/home/axtr/Documents/monkeyCsharp/Monkey.Interpreter/bin/Debug/net6.0/Monkey.Interpreter.dll
+/home/axtr/Documents/monkeyCsharp/Monkey.Interpreter/bin/Debug/net6.0/ref/Monkey.Interpreter.dll
+/home/axtr/Documents/monkeyCsharp/Monkey.Interpreter/bin/Debug/net6.0/Monkey.Interpreter.pdb
+/home/axtr/Documents/monkeyCsharp/Monkey.Interpreter/obj/Debug/net6.0/Monkey.Interpreter.csproj.AssemblyReference.cache
+/home/axtr/Documents/monkeyCsharp/Monkey.Interpreter/obj/Debug/net6.0/Monkey.Interpreter.GeneratedMSBuildEditorConfig.editorconfig
+/home/axtr/Documents/monkeyCsharp/Monkey.Interpreter/obj/Debug/net6.0/Monkey.Interpreter.AssemblyInfoInputs.cache
+/home/axtr/Documents/monkeyCsharp/Monkey.Interpreter/obj/Debug/net6.0/Monkey.Interpreter.AssemblyInfo.cs
+/home/axtr/Documents/monkeyCsharp/Monkey.Interpreter/obj/Debug/net6.0/Monkey.Interpreter.csproj.CoreCompileInputs.cache
+/home/axtr/Documents/monkeyCsharp/Monkey.Interpreter/obj/Debug/net6.0/Monkey.Interpreter.dll
+/home/axtr/Documents/monkeyCsharp/Monkey.Interpreter/obj/Debug/net6.0/ref/Monkey.Interpreter.dll
+/home/axtr/Documents/monkeyCsharp/Monkey.Interpreter/obj/Debug/net6.0/Monkey.Interpreter.pdb

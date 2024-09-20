@@ -1,34 +1,33 @@
 {
   "format": 1,
   "restore": {
-    "/Users/alexchau/Documents/Personal/monkey/Monkey.Parsing/Monkey.Parsing.csproj": {}
+    "/home/axtr/Documents/monkeyCsharp/Monkey.Parsing/Monkey.Parsing.csproj": {}
   },
   "projects": {
-    "/Users/alexchau/Documents/Personal/monkey/Monkey.Ast/Monkey.Ast.csproj": {
+    "/home/axtr/Documents/monkeyCsharp/Monkey.Ast/Monkey.Ast.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/alexchau/Documents/Personal/monkey/Monkey.Ast/Monkey.Ast.csproj",
+        "projectUniqueName": "/home/axtr/Documents/monkeyCsharp/Monkey.Ast/Monkey.Ast.csproj",
         "projectName": "Monkey.Ast",
-        "projectPath": "/Users/alexchau/Documents/Personal/monkey/Monkey.Ast/Monkey.Ast.csproj",
-        "packagesPath": "/Users/alexchau/.nuget/packages/",
-        "outputPath": "/Users/alexchau/Documents/Personal/monkey/Monkey.Ast/obj/",
+        "projectPath": "/home/axtr/Documents/monkeyCsharp/Monkey.Ast/Monkey.Ast.csproj",
+        "packagesPath": "/home/axtr/.nuget/packages/",
+        "outputPath": "/home/axtr/Documents/monkeyCsharp/Monkey.Ast/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/alexchau/.nuget/NuGet/NuGet.Config"
+          "/home/axtr/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nexus.finbourne.com/repository/nuget-hosted/": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/Users/alexchau/Documents/Personal/monkey/Monkey.Interpreter/Monkey.Interpreter.csproj": {
-                "projectPath": "/Users/alexchau/Documents/Personal/monkey/Monkey.Interpreter/Monkey.Interpreter.csproj"
+              "/home/axtr/Documents/monkeyCsharp/Monkey.Interpreter/Monkey.Interpreter.csproj": {
+                "projectPath": "/home/axtr/Documents/monkeyCsharp/Monkey.Interpreter/Monkey.Interpreter.csproj"
               }
             }
           }
@@ -54,8 +53,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -64,28 +62,27 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.425/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/6.0.133/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/alexchau/Documents/Personal/monkey/Monkey.Interpreter/Monkey.Interpreter.csproj": {
+    "/home/axtr/Documents/monkeyCsharp/Monkey.Interpreter/Monkey.Interpreter.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/alexchau/Documents/Personal/monkey/Monkey.Interpreter/Monkey.Interpreter.csproj",
+        "projectUniqueName": "/home/axtr/Documents/monkeyCsharp/Monkey.Interpreter/Monkey.Interpreter.csproj",
         "projectName": "Monkey.Interpreter",
-        "projectPath": "/Users/alexchau/Documents/Personal/monkey/Monkey.Interpreter/Monkey.Interpreter.csproj",
-        "packagesPath": "/Users/alexchau/.nuget/packages/",
-        "outputPath": "/Users/alexchau/Documents/Personal/monkey/Monkey.Interpreter/obj/",
+        "projectPath": "/home/axtr/Documents/monkeyCsharp/Monkey.Interpreter/Monkey.Interpreter.csproj",
+        "packagesPath": "/home/axtr/.nuget/packages/",
+        "outputPath": "/home/axtr/Documents/monkeyCsharp/Monkey.Interpreter/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/alexchau/.nuget/NuGet/NuGet.Config"
+          "/home/axtr/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nexus.finbourne.com/repository/nuget-hosted/": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
@@ -108,8 +105,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -118,38 +114,37 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.425/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/6.0.133/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/alexchau/Documents/Personal/monkey/Monkey.Parsing/Monkey.Parsing.csproj": {
+    "/home/axtr/Documents/monkeyCsharp/Monkey.Parsing/Monkey.Parsing.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/alexchau/Documents/Personal/monkey/Monkey.Parsing/Monkey.Parsing.csproj",
+        "projectUniqueName": "/home/axtr/Documents/monkeyCsharp/Monkey.Parsing/Monkey.Parsing.csproj",
         "projectName": "Monkey.Parsing",
-        "projectPath": "/Users/alexchau/Documents/Personal/monkey/Monkey.Parsing/Monkey.Parsing.csproj",
-        "packagesPath": "/Users/alexchau/.nuget/packages/",
-        "outputPath": "/Users/alexchau/Documents/Personal/monkey/Monkey.Parsing/obj/",
+        "projectPath": "/home/axtr/Documents/monkeyCsharp/Monkey.Parsing/Monkey.Parsing.csproj",
+        "packagesPath": "/home/axtr/.nuget/packages/",
+        "outputPath": "/home/axtr/Documents/monkeyCsharp/Monkey.Parsing/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/alexchau/.nuget/NuGet/NuGet.Config"
+          "/home/axtr/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nexus.finbourne.com/repository/nuget-hosted/": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/Users/alexchau/Documents/Personal/monkey/Monkey.Ast/Monkey.Ast.csproj": {
-                "projectPath": "/Users/alexchau/Documents/Personal/monkey/Monkey.Ast/Monkey.Ast.csproj"
+              "/home/axtr/Documents/monkeyCsharp/Monkey.Ast/Monkey.Ast.csproj": {
+                "projectPath": "/home/axtr/Documents/monkeyCsharp/Monkey.Ast/Monkey.Ast.csproj"
               },
-              "/Users/alexchau/Documents/Personal/monkey/Monkey.Interpreter/Monkey.Interpreter.csproj": {
-                "projectPath": "/Users/alexchau/Documents/Personal/monkey/Monkey.Interpreter/Monkey.Interpreter.csproj"
+              "/home/axtr/Documents/monkeyCsharp/Monkey.Interpreter/Monkey.Interpreter.csproj": {
+                "projectPath": "/home/axtr/Documents/monkeyCsharp/Monkey.Interpreter/Monkey.Interpreter.csproj"
               }
             }
           }
@@ -175,8 +170,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -185,7 +179,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.425/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/6.0.133/RuntimeIdentifierGraph.json"
         }
       }
     }

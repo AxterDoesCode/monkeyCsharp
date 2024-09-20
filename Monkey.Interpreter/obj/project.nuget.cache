@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mZvIjRb5Ri3OaPllEhs3Q8UdPcuPryhUkBIVOP+TLIgomn+7aeCldqNYnYETVQ3ihK+0ySxAEYo00M67vRkE0Q==",
+  "dgSpecHash": "sf6AT5A2v8U+r/UBJPF85ioUaWC1K3t/x9D5vL4Q7T8y0Z0nHyGIcxQMo5//O8xyG07k/uuOhSl2KP3X3pQsxw==",
   "success": true,
-  "projectFilePath": "/Users/alexchau/Documents/Personal/monkey/Monkey.Interpreter/Monkey.Interpreter.csproj",
+  "projectFilePath": "/home/axtr/Documents/monkeyCsharp/Monkey.Interpreter/Monkey.Interpreter.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
