@@ -310,9 +310,42 @@ public class FunctionLiteral : IExpression
         var Out = new StringBuilder();
         Out.Append(TokenLiteral());
         Out.Append('(');
-        Out.Append(Strings.Join(Parameters, ","));
+        foreach (var p in Parameters)
+        {
+            Out.Append($"{p.String()}, ");
+        }
         Out.Append(')');
         Out.Append(Body.String());
+        return Out.ToString();
+    }
+}
+
+public class CallExpression : IExpression
+{
+    public Token Token { get; set; }
+    public IExpression Function { get; set; }
+    public IExpression[] Args { get; set; }
+
+    public CallExpression(Token tok, IExpression fn) {
+        Token = tok;
+        Function = fn;
+    }
+
+    public void ExpressionNode()
+    { }
+    public string TokenLiteral() { return Token.Literal; }
+    public string String()
+    {
+        var Out = new StringBuilder();
+        var args = new List<string> { };
+        foreach (var arg in Args)
+        {
+            args.Add(arg.String());
+        }
+        Out.Append(Function.String());
+        Out.Append('(');
+        Out.Append(Strings.Join(args.ToArray()));
+        Out.Append(')');
         return Out.ToString();
     }
 }

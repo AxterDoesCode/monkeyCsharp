@@ -18,14 +18,14 @@ public class Parser
     Token peekToken;
     public List<Error> Errors { get; }
     Dictionary<string, Func<Option<IExpression>>> prefixParseFns;
-    Dictionary<string, Func<Option<IExpression>, Option<IExpression>>> infixParseFns;
+    Dictionary<string, Func<IExpression, Option<IExpression>>> infixParseFns;
     Dictionary<string, int> precedences;
     public Parser(Lexer l)
     {
         _lexer = l;
         Errors = new List<Error> { };
         prefixParseFns = new Dictionary<string, Func<Option<IExpression>>> { };
-        infixParseFns = new Dictionary<string, Func<Option<IExpression>, Option<IExpression>>> { };
+        infixParseFns = new Dictionary<string, Func<IExpression, Option<IExpression>>> { };
         precedences = new Dictionary<string, int> {
             {Token.EQ, EQUALS},
             {Token.NOT_EQ, EQUALS},
@@ -35,6 +35,7 @@ public class Parser
             {Token.MINUS, SUM},
             {Token.SLASH, PRODUCT},
             {Token.ASTERISK, PRODUCT},
+            {Token.LPAREN, CALL}
         };
         // Call NextToken twice to populate curToken and peekToken fields
         NextToken();
@@ -58,6 +59,7 @@ public class Parser
         RegisterInfix(Token.NOT_EQ, ParseInfixExpression);
         RegisterInfix(Token.LT, ParseInfixExpression);
         RegisterInfix(Token.GT, ParseInfixExpression);
+        RegisterInfix(Token.LPAREN, ParseCallExpression);
     }
 
     private Option<IExpression> ParseGroupedExpression()
@@ -69,6 +71,56 @@ public class Parser
             return Option<IExpression>.None;
         }
         return exp;
+    }
+
+    private Option<IExpression> ParseCallExpression(IExpression function)
+    {
+        var exp = new CallExpression(curToken, function);
+        return ParseCallArguments().Match(
+            None: Option<IExpression>.None,
+            Some: x => { exp.Args = x; return exp; }
+        );
+    }
+
+    private Option<IExpression[]> ParseCallArguments()
+    {
+        var args = new List<IExpression> { };
+
+        if (PeekTokenIs(Token.RPAREN))
+        {
+            NextToken();
+            return args.ToArray();
+        }
+
+        NextToken();
+
+        return from _ in ParseExpression(LOWEST).Match(
+            None: Option<Unit>.None,
+            Some: x =>
+            {
+                args.Add(x);
+                while (PeekTokenIs(Token.COMMA))
+                {
+                    NextToken();
+                    NextToken();
+                    var returnFlag = false; // Need this flag to break out of while, can't put a return before that match
+                    ParseExpression(LOWEST).Match(
+                        None: () => returnFlag = true,
+                        Some: arg => args.Add(arg)
+                    );
+                    if (returnFlag)
+                    {
+                        return Option<Unit>.None;
+                    }
+                }
+                if (!ExpectPeek(Token.RPAREN))
+                {
+                    return Option<Unit>.None;
+                }
+                return Unit.Default;
+            }
+        )
+               select args.ToArray();
     }
 
     private Option<IExpression> ParseFunctionLiteral()
@@ -197,7 +249,7 @@ public class Parser
         // {
         //     return Option<BlockStatement>.None;
         // }
-        
+
         // TODO: Maybe add a check for RBrace here;
         block.Statements = statements;
         return block;
@@ -329,6 +381,8 @@ public class Parser
             None: () => { leftExp = Option<IExpression>.None; NoPrefixParseFnError(curToken.Type); }
         );
 
+        // Surely I can fucking combine this into a single match I don't believe it
+
         if (leftExp.IsNone) { return leftExp; }
 
         while (!PeekTokenIs(Token.SEMICOLON) && precedence < PeekPrecedence())
@@ -336,7 +390,10 @@ public class Parser
             var infix = infixParseFns.TryGetValue(Key: peekToken.Type);
             if (infix.IsNone) { return leftExp; }
             infix.Match(
-                Some: x => { NextToken(); leftExp = x(leftExp); },
+                Some: x => { NextToken(); leftExp = leftExp.Match(
+                    None: Option<IExpression>.None, 
+                    Some: l => x(l)); 
+                },
                 None: () => { } // This will never happen btw
             );
         }
@@ -380,7 +437,7 @@ public class Parser
         prefixParseFns.Add(tokenType, fn);
     }
 
-    private void RegisterInfix(string tokenType, Func<Option<IExpression>, Option<IExpression>> fn)
+    private void RegisterInfix(string tokenType, Func<IExpression, Option<IExpression>> fn)
     {
         infixParseFns.Add(tokenType, fn);
     }
@@ -415,29 +472,17 @@ public class Parser
         return expression;
     }
 
-    private Option<IExpression> ParseInfixExpression(Option<IExpression> left)
+    private Option<IExpression> ParseInfixExpression(IExpression l)
     {
-        if (left.IsNone)
-        {
-            Console.WriteLine("This should legit never happen");
-            return Option<IExpression>.None;
-        }
-
         Option<IExpression> expression = Option<IExpression>.None;
         var tempCurToken = curToken;
 
-        left.Match(
-            Some: l =>
-            {
-                var precedence = CurPrecedence();
-                // Advance token to parse right side
-                NextToken();
-                ParseExpression(precedence).Match(
-                        Some: r => { expression = new InfixExpression(tempCurToken, tempCurToken.Literal, l, r); },
-                        None: () => { expression = new InfixExpression(curToken, curToken.Literal, l); }
-                    );
-            },
-            None: () => { }
+        var precedence = CurPrecedence();
+        // Advance token to parse right side
+        NextToken();
+        ParseExpression(precedence).Match(
+            Some: r => { expression = new InfixExpression(tempCurToken, tempCurToken.Literal, l, r); },
+            None: () => { expression = new InfixExpression(curToken, curToken.Literal, l); }
         );
         return expression;
     }
