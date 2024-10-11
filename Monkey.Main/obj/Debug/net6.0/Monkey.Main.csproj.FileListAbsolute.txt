@@ -50,3 +50,7 @@
 /home/axtr/Documents/monkeyCsharp/Monkey.Main/obj/Debug/net6.0/ref/Monkey.Main.dll
 /home/axtr/Documents/monkeyCsharp/Monkey.Main/obj/Debug/net6.0/Monkey.Main.pdb
 /home/axtr/Documents/monkeyCsharp/Monkey.Main/obj/Debug/net6.0/Monkey.Main.genruntimeconfig.cache
+/home/axtr/Documents/monkeyCsharp/Monkey.Main/bin/Debug/net6.0/Monkey.Evaluator.dll
+/home/axtr/Documents/monkeyCsharp/Monkey.Main/bin/Debug/net6.0/Monkey.Object.dll
+/home/axtr/Documents/monkeyCsharp/Monkey.Main/bin/Debug/net6.0/Monkey.Evaluator.pdb
+/home/axtr/Documents/monkeyCsharp/Monkey.Main/bin/Debug/net6.0/Monkey.Object.pdb

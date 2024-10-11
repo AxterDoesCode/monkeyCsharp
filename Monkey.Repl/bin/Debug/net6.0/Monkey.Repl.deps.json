@@ -8,7 +8,9 @@
     ".NETCoreApp,Version=v6.0": {
       "Monkey.Repl/1.0.0": {
         "dependencies": {
+          "Monkey.Evaluator": "1.0.0",
           "Monkey.Interpreter": "1.0.0",
+          "Monkey.Object": "1.0.0",
           "Monkey.Parsing": "1.0.0"
         },
         "runtime": {
@@ -225,9 +227,23 @@
           "Monkey.Ast.dll": {}
         }
       },
+      "Monkey.Evaluator/1.0.0": {
+        "dependencies": {
+          "Monkey.Ast": "1.0.0",
+          "Monkey.Object": "1.0.0"
+        },
+        "runtime": {
+          "Monkey.Evaluator.dll": {}
+        }
+      },
       "Monkey.Interpreter/1.0.0": {
         "runtime": {
           "Monkey.Interpreter.dll": {}
+        }
+      },
+      "Monkey.Object/1.0.0": {
+        "runtime": {
+          "Monkey.Object.dll": {}
         }
       },
       "Monkey.Parsing/1.0.0": {
@@ -463,7 +479,17 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Monkey.Evaluator/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "Monkey.Interpreter/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Monkey.Object/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

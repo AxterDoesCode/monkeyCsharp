@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "A0z87ZzS847N43d07YzGQoiMgSb+YGe/lc9rhkhE+i/CAOxf9ClpzLFNjMyttVHwPMq9tJa3IQrwMVB87TtDug==",
+  "dgSpecHash": "5kcYQDU/fkPrDRmbS3RMRhtbY/0e0nZGB/gyQu9BGrjO5DBy8ZLvezdeJabf8wG+Vxb3fy+yHbGOw6/e8HW5pw==",
   "success": true,
   "projectFilePath": "/home/axtr/Documents/monkeyCsharp/Monkey.Repl/Monkey.Repl.csproj",
   "expectedPackageFiles": [

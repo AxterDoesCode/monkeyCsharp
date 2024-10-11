@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monkey.Parsing", "Monkey.Pa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monkey.Repl", "Monkey.Repl\Monkey.Repl.csproj", "{117BBB6E-4364-48AE-AEA1-FA203CE5B822}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monkey.Object", "Monkey.Object\Monkey.Object.csproj", "{48D09618-50B8-47DC-B7C7-612866E5A6DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monkey.Evaluator", "Monkey.Evaluator\Monkey.Evaluator.csproj", "{C1ED3DE5-2B3C-4ACC-9DF2-01378A1F5158}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,5 +54,13 @@ Global
 		{117BBB6E-4364-48AE-AEA1-FA203CE5B822}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{117BBB6E-4364-48AE-AEA1-FA203CE5B822}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{117BBB6E-4364-48AE-AEA1-FA203CE5B822}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48D09618-50B8-47DC-B7C7-612866E5A6DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48D09618-50B8-47DC-B7C7-612866E5A6DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48D09618-50B8-47DC-B7C7-612866E5A6DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48D09618-50B8-47DC-B7C7-612866E5A6DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1ED3DE5-2B3C-4ACC-9DF2-01378A1F5158}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1ED3DE5-2B3C-4ACC-9DF2-01378A1F5158}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1ED3DE5-2B3C-4ACC-9DF2-01378A1F5158}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1ED3DE5-2B3C-4ACC-9DF2-01378A1F5158}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

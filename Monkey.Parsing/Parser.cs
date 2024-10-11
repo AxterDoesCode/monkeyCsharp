@@ -1,7 +1,6 @@
 ﻿using Monkey.Interpreter.Lexing;
 using Monkey.Ast;
 using LanguageExt;
-using LanguageExt.SomeHelp;
 namespace Monkey.Parsing;
 public class Parser
 {
@@ -333,13 +332,17 @@ public class Parser
     private Option<IStatement> ParseReturnStatement()
     {
         var stmt = new ReturnStatement(curToken);
-
-        //TODO: Skipping expressions until we encounter a semicolon currently
-        while (!CurTokenIs(Token.SEMICOLON))
-        {
-            NextToken();
-        }
-        return Option<IStatement>.Some(stmt);
+        NextToken();
+        return ParseExpression(LOWEST).Match(
+            None: Option<IStatement>.None,
+            Some: x => {
+                stmt.ReturnValue = x;
+                if (PeekTokenIs(Token.SEMICOLON)) {
+                    NextToken();
+                }
+                return stmt;
+            }
+        );
     }
 
     private Option<IStatement> ParseLetStatement()
@@ -358,13 +361,21 @@ public class Parser
             return Option<IStatement>.None;
         }
 
-        // TODO: Skipping the expressions currently until we find the semicolon.
-        while (!CurTokenIs(Token.SEMICOLON))
-        {
-            NextToken();
-        }
+        NextToken();
 
-        return Option<IStatement>.Some(stmt);
+        return ParseExpression(LOWEST).Match(
+            None: Option<IStatement>.None,
+            Some: x =>
+            {
+                stmt.Value = x;
+                if (PeekTokenIs(Token.SEMICOLON))
+                {
+                    NextToken();
+                }
+                return stmt;
+            }
+        );
+
     }
 
     private void NoPrefixParseFnError(string tokenType)
@@ -390,9 +401,11 @@ public class Parser
             var infix = infixParseFns.TryGetValue(Key: peekToken.Type);
             if (infix.IsNone) { return leftExp; }
             infix.Match(
-                Some: x => { NextToken(); leftExp = leftExp.Match(
-                    None: Option<IExpression>.None, 
-                    Some: l => x(l)); 
+                Some: x =>
+                {
+                    NextToken(); leftExp = leftExp.Match(
+                    None: Option<IExpression>.None,
+                    Some: l => x(l));
                 },
                 None: () => { } // This will never happen btw
             );

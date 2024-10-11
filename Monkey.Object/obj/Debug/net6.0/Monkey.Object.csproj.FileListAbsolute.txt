@@ -1,0 +1,12 @@
+/home/axtr/Documents/monkeyCsharp/Monkey.Object/bin/Debug/net6.0/Monkey.Object.deps.json
+/home/axtr/Documents/monkeyCsharp/Monkey.Object/bin/Debug/net6.0/Monkey.Object.dll
+/home/axtr/Documents/monkeyCsharp/Monkey.Object/bin/Debug/net6.0/ref/Monkey.Object.dll
+/home/axtr/Documents/monkeyCsharp/Monkey.Object/bin/Debug/net6.0/Monkey.Object.pdb
+/home/axtr/Documents/monkeyCsharp/Monkey.Object/obj/Debug/net6.0/Monkey.Object.csproj.AssemblyReference.cache
+/home/axtr/Documents/monkeyCsharp/Monkey.Object/obj/Debug/net6.0/Monkey.Object.GeneratedMSBuildEditorConfig.editorconfig
+/home/axtr/Documents/monkeyCsharp/Monkey.Object/obj/Debug/net6.0/Monkey.Object.AssemblyInfoInputs.cache
+/home/axtr/Documents/monkeyCsharp/Monkey.Object/obj/Debug/net6.0/Monkey.Object.AssemblyInfo.cs
+/home/axtr/Documents/monkeyCsharp/Monkey.Object/obj/Debug/net6.0/Monkey.Object.csproj.CoreCompileInputs.cache
+/home/axtr/Documents/monkeyCsharp/Monkey.Object/obj/Debug/net6.0/Monkey.Object.dll
+/home/axtr/Documents/monkeyCsharp/Monkey.Object/obj/Debug/net6.0/ref/Monkey.Object.dll
+/home/axtr/Documents/monkeyCsharp/Monkey.Object/obj/Debug/net6.0/Monkey.Object.pdb

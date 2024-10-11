@@ -1,4 +1,5 @@
-﻿using Monkey.Interpreter.Lexing;
+﻿using Monkey.Evaluator;
+using Monkey.Interpreter.Lexing;
 using Monkey.Parsing;
 
 namespace Monkey.Repl;
@@ -12,11 +13,23 @@ public class Repl
             Console.Write(">> ");
             string line = Console.ReadLine();
             Lexer l = new Lexer(line);
+            var evaluator = new Evaluator.Evaluator();
             var p = new Parser(l);
             var program = p.ParseProgram();
-            Console.WriteLine(program.String());
-            foreach(var error in p.Errors) {
-                Console.WriteLine($"Error: {error.ErrorMessage}");
+            if (p.Errors.Any())
+            {
+                foreach (var error in p.Errors)
+                {
+                    Console.WriteLine($"Error: {error.ErrorMessage}");
+                }
+            }
+            else
+            {
+                // Console.WriteLine(program.String());
+                var evaluated = evaluator.Eval(program);
+                if (evaluated != null) {
+                    Console.WriteLine(evaluated.Inspect());
+                }
             }
         }
     }

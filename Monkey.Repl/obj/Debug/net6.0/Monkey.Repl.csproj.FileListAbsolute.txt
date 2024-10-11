@@ -36,3 +36,7 @@
 /home/axtr/Documents/monkeyCsharp/Monkey.Repl/obj/Debug/net6.0/Monkey.Repl.dll
 /home/axtr/Documents/monkeyCsharp/Monkey.Repl/obj/Debug/net6.0/ref/Monkey.Repl.dll
 /home/axtr/Documents/monkeyCsharp/Monkey.Repl/obj/Debug/net6.0/Monkey.Repl.pdb
+/home/axtr/Documents/monkeyCsharp/Monkey.Repl/bin/Debug/net6.0/Monkey.Evaluator.dll
+/home/axtr/Documents/monkeyCsharp/Monkey.Repl/bin/Debug/net6.0/Monkey.Object.dll
+/home/axtr/Documents/monkeyCsharp/Monkey.Repl/bin/Debug/net6.0/Monkey.Evaluator.pdb
+/home/axtr/Documents/monkeyCsharp/Monkey.Repl/bin/Debug/net6.0/Monkey.Object.pdb
