@@ -1,4 +1,7 @@
-﻿namespace Monkey.Object;
+﻿using System.Text;
+using Microsoft.VisualBasic;
+
+namespace Monkey.Object;
 public interface IObject
 {
     string Type();
@@ -12,11 +15,13 @@ public class ObjectType
     public const string NULL_OBJ = "NULL";
     public const string RETURN_VALUE_OBJ = "RETURN_VALUE";
     public const string ERROR_OBJ = "ERROR";
+    public const string FUNCTION_OBJ = "FUNCTION";
 }
 
 public class Error : IObject
 {
-    public Error(string errMsg) {
+    public Error(string errMsg)
+    {
         Message = errMsg;
     }
     public string Message;
@@ -26,7 +31,8 @@ public class Error : IObject
 
 public class ReturnValue : IObject
 {
-    public ReturnValue(IObject obj) {
+    public ReturnValue(IObject obj)
+    {
         Value = obj;
     }
     public IObject Value;
@@ -59,4 +65,31 @@ public class Null : IObject
 {
     public string Type() { return ObjectType.NULL_OBJ; }
     public string Inspect() { return "null"; }
+}
+
+public class Function : IObject
+{
+    public Function(Ast.Identifier[] parameters, Ast.BlockStatement body, Environment env)
+    {
+        Parameters = parameters;
+        Body = body;
+        Env = env;
+    }
+    public Ast.BlockStatement Body;
+    public Ast.Identifier[] Parameters;
+    public Environment Env;
+    public string Type() { return ObjectType.FUNCTION_OBJ; }
+    public string Inspect()
+    {
+        var Out = new StringBuilder();
+        var Params = new List<string>();
+        foreach (var p in Parameters)
+        {
+            Params.Add(p.String());
+        }
+        Out.Append("fn(");
+        Out.AppendLine(Strings.Join(Params.ToArray(), ", ") + ")");
+        Out.AppendLine(Body.String());
+        return Out.ToString();
+    }
 }

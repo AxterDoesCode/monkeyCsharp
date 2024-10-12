@@ -8,6 +8,7 @@ public class Repl
 {
     public static void Start()
     {
+        var env = Object.Environment.NewEnvironment();
         while (true)
         {
             Console.Write(">> ");
@@ -26,8 +27,9 @@ public class Repl
             else
             {
                 // Console.WriteLine(program.String());
-                var evaluated = evaluator.Eval(program);
-                if (evaluated != null) {
+                var evaluated = evaluator.Eval(program, ref env);
+                if (evaluated != null)
+                {
                     Console.WriteLine(evaluated.Inspect());
                 }
             }

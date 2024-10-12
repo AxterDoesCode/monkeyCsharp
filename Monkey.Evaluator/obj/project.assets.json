@@ -400,6 +400,10 @@
       "Monkey.Object/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "LanguageExt.Core": "4.4.9",
+          "Monkey.Ast": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/Monkey.Object.dll": {}
         },

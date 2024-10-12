@@ -4,14 +4,76 @@
     "/home/axtr/Documents/monkeyCsharp/Monkey.Object/Monkey.Object.csproj": {}
   },
   "projects": {
-    "/home/axtr/Documents/monkeyCsharp/Monkey.Object/Monkey.Object.csproj": {
+    "/home/axtr/Documents/monkeyCsharp/Monkey.Ast/Monkey.Ast.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/axtr/Documents/monkeyCsharp/Monkey.Object/Monkey.Object.csproj",
-        "projectName": "Monkey.Object",
-        "projectPath": "/home/axtr/Documents/monkeyCsharp/Monkey.Object/Monkey.Object.csproj",
+        "projectUniqueName": "/home/axtr/Documents/monkeyCsharp/Monkey.Ast/Monkey.Ast.csproj",
+        "projectName": "Monkey.Ast",
+        "projectPath": "/home/axtr/Documents/monkeyCsharp/Monkey.Ast/Monkey.Ast.csproj",
         "packagesPath": "/home/axtr/.nuget/packages/",
-        "outputPath": "/home/axtr/Documents/monkeyCsharp/Monkey.Object/obj/",
+        "outputPath": "/home/axtr/Documents/monkeyCsharp/Monkey.Ast/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/axtr/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/home/axtr/Documents/monkeyCsharp/Monkey.Interpreter/Monkey.Interpreter.csproj": {
+                "projectPath": "/home/axtr/Documents/monkeyCsharp/Monkey.Interpreter/Monkey.Interpreter.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "LanguageExt.Core": {
+              "target": "Package",
+              "version": "[4.4.9, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/6.0.133/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/axtr/Documents/monkeyCsharp/Monkey.Interpreter/Monkey.Interpreter.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/axtr/Documents/monkeyCsharp/Monkey.Interpreter/Monkey.Interpreter.csproj",
+        "projectName": "Monkey.Interpreter",
+        "projectPath": "/home/axtr/Documents/monkeyCsharp/Monkey.Interpreter/Monkey.Interpreter.csproj",
+        "packagesPath": "/home/axtr/.nuget/packages/",
+        "outputPath": "/home/axtr/Documents/monkeyCsharp/Monkey.Interpreter/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/axtr/.nuget/NuGet/NuGet.Config"
@@ -37,6 +99,68 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/6.0.133/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/axtr/Documents/monkeyCsharp/Monkey.Object/Monkey.Object.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/axtr/Documents/monkeyCsharp/Monkey.Object/Monkey.Object.csproj",
+        "projectName": "Monkey.Object",
+        "projectPath": "/home/axtr/Documents/monkeyCsharp/Monkey.Object/Monkey.Object.csproj",
+        "packagesPath": "/home/axtr/.nuget/packages/",
+        "outputPath": "/home/axtr/Documents/monkeyCsharp/Monkey.Object/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/axtr/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/home/axtr/Documents/monkeyCsharp/Monkey.Ast/Monkey.Ast.csproj": {
+                "projectPath": "/home/axtr/Documents/monkeyCsharp/Monkey.Ast/Monkey.Ast.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "LanguageExt.Core": {
+              "target": "Package",
+              "version": "[4.4.9, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

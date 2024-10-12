@@ -10,3 +10,8 @@
 /home/axtr/Documents/monkeyCsharp/Monkey.Object/obj/Debug/net6.0/Monkey.Object.dll
 /home/axtr/Documents/monkeyCsharp/Monkey.Object/obj/Debug/net6.0/ref/Monkey.Object.dll
 /home/axtr/Documents/monkeyCsharp/Monkey.Object/obj/Debug/net6.0/Monkey.Object.pdb
+/home/axtr/Documents/monkeyCsharp/Monkey.Object/bin/Debug/net6.0/Monkey.Ast.dll
+/home/axtr/Documents/monkeyCsharp/Monkey.Object/bin/Debug/net6.0/Monkey.Interpreter.dll
+/home/axtr/Documents/monkeyCsharp/Monkey.Object/bin/Debug/net6.0/Monkey.Ast.pdb
+/home/axtr/Documents/monkeyCsharp/Monkey.Object/bin/Debug/net6.0/Monkey.Interpreter.pdb
+/home/axtr/Documents/monkeyCsharp/Monkey.Object/obj/Debug/net6.0/Monkey.Object.csproj.CopyComplete

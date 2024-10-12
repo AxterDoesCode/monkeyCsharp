@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "TtRJkcYWABm+uSH4DkoNsV+muPhjDrOYPVfUQmwVzBb0mitRvCk3bPq6C7NBAaZNzyAvGfLlqNjvbhX+juP6mQ==",
+  "dgSpecHash": "jUMwVtiuGXF40LwSO9JfgQ75JILwe4YAspm3rga5dWhvCqGwk3taSwUeBh4ZYxWPuCsEv6s6wNkDnO9FO+YvBg==",
   "success": true,
   "projectFilePath": "/home/axtr/Documents/monkeyCsharp/Monkey.Evaluator/Monkey.Evaluator.csproj",
   "expectedPackageFiles": [
