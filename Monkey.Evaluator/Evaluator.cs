@@ -73,6 +73,8 @@ public class Evaluator
                     return args[0];
                 }
                 return ApplyFunction(func, args);
+            case StringLiteral x:
+                return new Object.String(x.Value);
         }
         return null;
     }
@@ -280,8 +282,8 @@ public class Evaluator
         return input ? TRUE : FALSE;
     }
 
-    private Object.Error NewError(string format, params string[] args)
+    private Error NewError(string format, params string[] args)
     {
-        return new Object.Error(String.Format(format, args));
+        return new Error(string.Format(format, args));
     }
 }

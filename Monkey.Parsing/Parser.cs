@@ -49,6 +49,7 @@ public class Parser
         RegisterPrefix(Token.LPAREN, ParseGroupedExpression);
         RegisterPrefix(Token.IF, ParseIfExpression);
         RegisterPrefix(Token.FUNCTION, ParseFunctionLiteral);
+        RegisterPrefix(Token.STRING, ParseStringLiteral);
 
         RegisterInfix(Token.PLUS, ParseInfixExpression);
         RegisterInfix(Token.MINUS, ParseInfixExpression);
@@ -335,9 +336,11 @@ public class Parser
         NextToken();
         return ParseExpression(LOWEST).Match(
             None: Option<IStatement>.None,
-            Some: x => {
+            Some: x =>
+            {
                 stmt.ReturnValue = x;
-                if (PeekTokenIs(Token.SEMICOLON)) {
+                if (PeekTokenIs(Token.SEMICOLON))
+                {
                     NextToken();
                 }
                 return stmt;
@@ -498,5 +501,10 @@ public class Parser
             None: () => { expression = new InfixExpression(curToken, curToken.Literal, l); }
         );
         return expression;
+    }
+
+    private Option<IExpression> ParseStringLiteral()
+    {
+        return new StringLiteral(curToken, curToken.Literal);
     }
 }

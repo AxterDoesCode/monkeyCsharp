@@ -16,6 +16,7 @@ public class ObjectType
     public const string RETURN_VALUE_OBJ = "RETURN_VALUE";
     public const string ERROR_OBJ = "ERROR";
     public const string FUNCTION_OBJ = "FUNCTION";
+    public const string STRING_OBJ = "STRING";
 }
 
 public class Error : IObject
@@ -92,4 +93,16 @@ public class Function : IObject
         Out.AppendLine(Body.String());
         return Out.ToString();
     }
+}
+
+public class String : IObject
+{
+    public string Value;
+
+    public String(string s)
+    {
+        Value = s;
+    }
+    public string Type() { return ObjectType.STRING_OBJ; }
+    public string Inspect() { return Value; }
 }

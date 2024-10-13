@@ -182,6 +182,22 @@ public class IntegerLiteral : IExpression
     public string String() { return Token.Literal; }
 }
 
+public class StringLiteral : IExpression
+{
+    public Token Token;
+    public string Value { get; set; }
+
+    public StringLiteral(Token tok, string val)
+    {
+        Token = tok;
+        Value = val;
+    }
+    public void ExpressionNode() { }
+    public string TokenLiteral() { return Token.Literal; }
+    public string String() { return Token.Literal; }
+}
+
+
 public class PrefixExpression : IExpression
 {
     public Token Token;

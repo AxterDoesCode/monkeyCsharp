@@ -42,6 +42,20 @@ public class Lexer
         return _input[pos.._position];
     }
 
+    private string ReadString()
+    {
+        int pos = _position + 1;
+        while(true)
+        {
+            ReadChar();
+            if (_ch == '"' || _ch == 0)
+            {
+                break;
+            }
+        }
+        return _input[pos.._position];
+    }
+
     private void SkipWhiteSpace()
     {
         while (_ch == ' ' || _ch == '\t' || _ch == '\n' || _ch == '\r')
@@ -142,6 +156,9 @@ public class Lexer
                 break;
             case '\0':
                 tok = new Token(Token.EOF, _ch);
+                break;
+            case '"':
+                tok = new Token(Token.STRING, ReadString());
                 break;
             default:
                 if (IsLetter(_ch))
