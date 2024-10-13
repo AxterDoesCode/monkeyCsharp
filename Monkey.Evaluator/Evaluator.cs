@@ -2,6 +2,7 @@
 using Monkey.Ast;
 using Monkey.Object;
 
+
 namespace Monkey.Evaluator;
 public class Evaluator
 {
@@ -81,19 +82,23 @@ public class Evaluator
 
     private IObject ApplyFunction(IObject fn, IObject[] args)
     {
-        if (fn is not Object.Function)
+        switch (fn)
         {
-            return NewError("not a function: {0}", fn.Type());
+            case Function f:
+                var extendedEnv = ExtendFunctionEnv((Function)fn, args);
+                var evaluated = Eval(((Function)fn).Body, ref extendedEnv);
+                return UnwrapReturnValue(evaluated);
+            case Builtin f:
+                return f.Fn(args);
+            default:
+                return NewError("not a function: {0}", fn.Type());
         }
-
-        var extendedEnv = ExtendFunctionEnv((Object.Function)fn, args);
-        var evaluated = Eval(((Object.Function)fn).Body, ref extendedEnv);
-        return UnwrapReturnValue(evaluated);
     }
 
     private IObject UnwrapReturnValue(IObject obj)
     {
-        if(obj is ReturnValue rv) {
+        if (obj is ReturnValue rv)
+        {
             return rv.Value;
         }
         return obj;
@@ -129,8 +134,14 @@ public class Evaluator
     private IObject EvalIdentifier(Identifier node, ref Object.Environment env)
     {
         return env.Get(node.Value).Match(
-            None: NewError("Identifier not found: {0}", node.Value),
-            Some: x => x
+            Some: x => x,
+            None: () =>
+            {
+                return MonkeyBuiltins.Builtins.TryGetValue(Key: node.Value).Match(
+                    None: NewError("Identifier not found: {0}", node.Value),
+                    Some: b => b as IObject // Is this allowed?
+            );
+            }
         );
     }
 
@@ -179,6 +190,10 @@ public class Evaluator
         {
             return EvalIntegerInfixExpression(op, l, r);
         }
+        else if (l.Type() == ObjectType.STRING_OBJ && r.Type() == ObjectType.STRING_OBJ)
+        {
+            return EvalStringInfixExpression(op, l, r);
+        }
         else if (op == "==")
         {
             return NativeBoolToBooleanObject(l == r);
@@ -213,6 +228,17 @@ public class Evaluator
             "!=" => NativeBoolToBooleanObject(leftVal != rightVal),
             _ => NewError("unknown operator: {0} {1} {2}", l.Type(), op, r.Type()),
         };
+    }
+
+    private IObject EvalStringInfixExpression(string op, IObject l, IObject r)
+    {
+        if (op != "+")
+        {
+            return NewError("unknown operator: {0} {1} {2}", l.Type(), op, r.Type());
+        }
+        var leftVal = ((Object.String)l).Value;
+        var rightVal = ((Object.String)r).Value;
+        return new Object.String(leftVal + rightVal);
     }
 
     private IObject EvalPrefixExpression(string op, IObject right)
@@ -282,7 +308,7 @@ public class Evaluator
         return input ? TRUE : FALSE;
     }
 
-    private Error NewError(string format, params string[] args)
+    public static Error NewError(string format, params string[] args)
     {
         return new Error(string.Format(format, args));
     }

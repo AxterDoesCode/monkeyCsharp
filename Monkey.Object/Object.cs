@@ -2,6 +2,7 @@
 using Microsoft.VisualBasic;
 
 namespace Monkey.Object;
+using BuiltinFunction = Func<IObject[], IObject>;
 public interface IObject
 {
     string Type();
@@ -17,6 +18,7 @@ public class ObjectType
     public const string ERROR_OBJ = "ERROR";
     public const string FUNCTION_OBJ = "FUNCTION";
     public const string STRING_OBJ = "STRING";
+    public const string BUILTIN_OBJ = "BUILTIN";
 }
 
 public class Error : IObject
@@ -105,4 +107,16 @@ public class String : IObject
     }
     public string Type() { return ObjectType.STRING_OBJ; }
     public string Inspect() { return Value; }
+}
+
+public class Builtin : IObject
+{
+    public BuiltinFunction Fn;
+
+    public Builtin(BuiltinFunction bfn)
+    {
+        Fn = bfn;
+    }
+    public string Type() { return ObjectType.BUILTIN_OBJ; }
+    public string Inspect() { return "builtin function"; }
 }
