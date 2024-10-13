@@ -154,6 +154,12 @@ public class Lexer
             case '}':
                 tok = new Token(Token.RBRACE, _ch);
                 break;
+            case '[':
+                tok = new Token(Token.LBRACKET, _ch);
+                break;
+            case ']':
+                tok = new Token(Token.RBRACKET, _ch);
+                break;
             case '\0':
                 tok = new Token(Token.EOF, _ch);
                 break;

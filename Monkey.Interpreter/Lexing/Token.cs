@@ -28,6 +28,8 @@ public class Token
     public const string RPAREN = ")";
     public const string LBRACE = "{";
     public const string RBRACE = "}";
+    public const string LBRACKET = "[";
+    public const string RBRACKET = "]";
 
     // Keywords
     public const string FUNCTION = "FUNCTION";

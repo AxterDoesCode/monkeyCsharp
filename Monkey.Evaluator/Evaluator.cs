@@ -76,8 +76,51 @@ public class Evaluator
                 return ApplyFunction(func, args);
             case StringLiteral x:
                 return new Object.String(x.Value);
+            case ArrayLiteral x:
+                var elements = EvalExpressions(x.Elements, env);
+                if (elements.Length == 1 && IsError(elements[0]))
+                {
+                    return elements[0];
+                }
+                return new Object.Array(elements);
+            case IndexExpression x:
+                var leftIE = Eval(x.left, ref env);
+                if (IsError(leftIE))
+                {
+                    return leftIE;
+                }
+                var index = Eval(x.index, ref env);
+                if (IsError(index))
+                {
+                    return index;
+                }
+                return EvalIndexExpression(leftIE, index);
         }
         return null;
+    }
+
+    private IObject EvalIndexExpression(IObject left, IObject index)
+    {
+        if (left.Type() == ObjectType.ARRAY_OBJ && index.Type() == ObjectType.INTEGER_OBJ)
+        {
+            return EvalArrayIndexExpression(left, index);
+        }
+        else
+        {
+            Console.WriteLine($"index type {index.Type()}");
+            return NewError("index operator not supported: {0}", left.Type());
+        }
+    }
+    private IObject EvalArrayIndexExpression(IObject left, IObject index)
+    {
+        var arrayObject = (Object.Array)left;
+        var idx = ((Integer)index).value;
+        var max = arrayObject.Elements.Length - 1;
+        if (idx < 0 || idx > max)
+        {
+            return NULL;
+        }
+        return arrayObject.Elements[idx];
     }
 
     private IObject ApplyFunction(IObject fn, IObject[] args)
@@ -116,7 +159,7 @@ public class Evaluator
         return env;
     }
 
-    private IObject[] EvalExpressions(Ast.IExpression[] exps, Object.Environment env)
+    private IObject[] EvalExpressions(IExpression[] exps, Object.Environment env)
     {
         var res = new List<IObject>();
         foreach (var e in exps)

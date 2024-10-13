@@ -341,7 +341,8 @@ public class CallExpression : IExpression
     public IExpression Function { get; set; }
     public IExpression[] Args { get; set; }
 
-    public CallExpression(Token tok, IExpression fn) {
+    public CallExpression(Token tok, IExpression fn)
+    {
         Token = tok;
         Function = fn;
     }
@@ -361,6 +362,55 @@ public class CallExpression : IExpression
         Out.Append('(');
         Out.Append(Strings.Join(args.ToArray()));
         Out.Append(')');
+        return Out.ToString();
+    }
+}
+
+public class ArrayLiteral : IExpression
+{
+    public Token Token;
+    public IExpression[] Elements { get; set; }
+
+    public ArrayLiteral(Token tok)
+    {
+        Token = tok;
+    }
+    public void ExpressionNode() { }
+    public string TokenLiteral() { return Token.Literal; }
+    public string String()
+    {
+        var Out = new StringBuilder();
+        var elements = new List<string>();
+        foreach (var el in Elements)
+        {
+            elements.Add(el.String());
+        }
+        return Out.ToString();
+    }
+}
+
+public class IndexExpression : IExpression
+{
+    public Token Token;
+    public IExpression left;
+    public IExpression index;
+
+    public IndexExpression(Token tok, IExpression l)
+    {
+        Token = tok;
+        left = l;
+    }
+
+    public void ExpressionNode() { }
+    public string TokenLiteral() { return Token.Literal; }
+    public string String()
+    {
+        var Out = new StringBuilder();
+        Out.Append('(');
+        Out.Append(left.String());
+        Out.Append('[');
+        Out.Append(index.String());
+        Out.Append("])");
         return Out.ToString();
     }
 }

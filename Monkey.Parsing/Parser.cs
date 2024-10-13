@@ -11,6 +11,7 @@ public class Parser
     public const int PRODUCT = 5;
     public const int PREFIX = 6;
     public const int CALL = 7;
+    public const int INDEX = 8;
 
     Lexer _lexer;
     Token curToken;
@@ -34,7 +35,8 @@ public class Parser
             {Token.MINUS, SUM},
             {Token.SLASH, PRODUCT},
             {Token.ASTERISK, PRODUCT},
-            {Token.LPAREN, CALL}
+            {Token.LPAREN, CALL},
+            {Token.LBRACKET, INDEX}
         };
         // Call NextToken twice to populate curToken and peekToken fields
         NextToken();
@@ -50,6 +52,7 @@ public class Parser
         RegisterPrefix(Token.IF, ParseIfExpression);
         RegisterPrefix(Token.FUNCTION, ParseFunctionLiteral);
         RegisterPrefix(Token.STRING, ParseStringLiteral);
+        RegisterPrefix(Token.LBRACKET, ParseArrayLiteral);
 
         RegisterInfix(Token.PLUS, ParseInfixExpression);
         RegisterInfix(Token.MINUS, ParseInfixExpression);
@@ -60,6 +63,35 @@ public class Parser
         RegisterInfix(Token.LT, ParseInfixExpression);
         RegisterInfix(Token.GT, ParseInfixExpression);
         RegisterInfix(Token.LPAREN, ParseCallExpression);
+        RegisterInfix(Token.LBRACKET, ParseIndexExpression);
+
+    }
+
+    private Option<IExpression> ParseIndexExpression(IExpression left)
+    {
+        var exp = new IndexExpression(curToken, left);
+        NextToken();
+        return ParseExpression(LOWEST).Match(
+            None: Option<IExpression>.None,
+            Some: x =>
+            {
+                if (!ExpectPeek(Token.RBRACKET))
+                {
+                    return Option<IExpression>.None;
+                }
+                exp.index = x;
+                return exp;
+            }
+        );
+    }
+
+    private Option<IExpression> ParseArrayLiteral()
+    {
+        var array = new ArrayLiteral(curToken);
+        return ParseExpressionList(Token.RBRACKET).Match(
+            None: Option<IExpression>.None,
+            Some: x => { array.Elements = x; return array; }
+        );
     }
 
     private Option<IExpression> ParseGroupedExpression()
@@ -76,17 +108,17 @@ public class Parser
     private Option<IExpression> ParseCallExpression(IExpression function)
     {
         var exp = new CallExpression(curToken, function);
-        return ParseCallArguments().Match(
+        return ParseExpressionList(Token.RPAREN).Match(
             None: Option<IExpression>.None,
             Some: x => { exp.Args = x; return exp; }
         );
     }
 
-    private Option<IExpression[]> ParseCallArguments()
+    private Option<IExpression[]> ParseExpressionList(string end)
     {
         var args = new List<IExpression> { };
 
-        if (PeekTokenIs(Token.RPAREN))
+        if (PeekTokenIs(end))
         {
             NextToken();
             return args.ToArray();
@@ -113,7 +145,7 @@ public class Parser
                         return Option<Unit>.None;
                     }
                 }
-                if (!ExpectPeek(Token.RPAREN))
+                if (!ExpectPeek(end))
                 {
                     return Option<Unit>.None;
                 }

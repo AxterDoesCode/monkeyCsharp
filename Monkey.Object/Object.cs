@@ -19,6 +19,7 @@ public class ObjectType
     public const string FUNCTION_OBJ = "FUNCTION";
     public const string STRING_OBJ = "STRING";
     public const string BUILTIN_OBJ = "BUILTIN";
+    public const string ARRAY_OBJ = "ARRAY";
 }
 
 public class Error : IObject
@@ -119,4 +120,27 @@ public class Builtin : IObject
     }
     public string Type() { return ObjectType.BUILTIN_OBJ; }
     public string Inspect() { return "builtin function"; }
+}
+
+public class Array : IObject
+{
+    public IObject[] Elements;
+    public Array(IObject[] elements)
+    {
+        Elements = elements;
+    }
+    public string Type() { return ObjectType.ARRAY_OBJ; }
+    public string Inspect()
+    {
+        var Out = new StringBuilder();
+        var elements = new List<string>();
+        foreach (var el in Elements)
+        {
+            elements.Add(el.Inspect());
+        }
+        Out.Append('[');
+        Out.Append(Strings.Join(elements.ToArray(), ", "));
+        Out.Append(']');
+        return Out.ToString();
+    }
 }
