@@ -23,6 +23,7 @@ public class Token
     // Delimiters
     public const string COMMA = ",";
     public const string SEMICOLON = ";";
+    public const string COLON = ";";
 
     public const string LPAREN = "(";
     public const string RPAREN = ")";

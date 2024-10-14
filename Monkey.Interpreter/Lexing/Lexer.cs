@@ -108,6 +108,9 @@ public class Lexer
             case ';':
                 tok = new Token(Token.SEMICOLON, _ch);
                 break;
+            case ':':
+                tok = new Token(Token.COLON, _ch);
+                break;
             case '(':
                 tok = new Token(Token.LPAREN, _ch);
                 break;

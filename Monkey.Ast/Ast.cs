@@ -414,3 +414,31 @@ public class IndexExpression : IExpression
         return Out.ToString();
     }
 }
+
+public class HashLiteral : IExpression
+{
+    public Token Token;
+    public Dictionary<IExpression, IExpression> Pairs;
+
+    public HashLiteral(Token tok)
+    {
+        Token = tok;
+        Pairs = new Dictionary<IExpression, IExpression>();
+    }
+
+    public void ExpressionNode() { }
+    public string TokenLiteral() { return Token.Literal; }
+    public string String()
+    {
+        var Out = new StringBuilder();
+        var pairs = new List<string>();
+        foreach (KeyValuePair<IExpression, IExpression> entry in Pairs)
+        {
+            pairs.Add($"{entry.Key.String()}:{entry.Value.String()}");
+        }
+        Out.Append('{');
+        Out.Append(Strings.Join(pairs.ToArray(), ", "));
+        Out.Append('}');
+        return Out.ToString();
+    }
+}

@@ -95,8 +95,38 @@ public class Evaluator
                     return index;
                 }
                 return EvalIndexExpression(leftIE, index);
+            case HashLiteral x:
+                return EvalHashLiteral(x, env);
         }
         return null;
+    }
+
+    private IObject EvalHashLiteral(HashLiteral node, Object.Environment env)
+    {
+        var pairs = new Dictionary<HashKey, HashPair>();
+        foreach (var pair in node.Pairs)
+        {
+            var key = Eval(pair.Key, ref env);
+            if (IsError(key))
+            {
+                return key;
+            }
+
+            if (key is not IHashable)
+            {
+                return NewError("unusable as hash key: {0}", key.Type());
+            }
+
+            var value = Eval(pair.Value, ref env);
+            if (IsError(value))
+            {
+                return value;
+            }
+
+            var hashed = ((IHashable)key).HashKey();
+            pairs[hashed] = new HashPair { Key = key, Value = value };
+        }
+        return new Hash(pairs);
     }
 
     private IObject EvalIndexExpression(IObject left, IObject index)
@@ -105,11 +135,28 @@ public class Evaluator
         {
             return EvalArrayIndexExpression(left, index);
         }
+        else if (left.Type() == ObjectType.HASH_OBJ)
+        {
+            return EvalHashIndexExpression(left, index);
+        }
         else
         {
             Console.WriteLine($"index type {index.Type()}");
             return NewError("index operator not supported: {0}", left.Type());
         }
+    }
+
+    private IObject EvalHashIndexExpression(IObject hash, IObject index)
+    {
+        var hashObject = (Hash)hash;
+        if (index is not IHashable)
+        {
+            return NewError("unusable as hash key: {0}", index.Type());
+        }
+        return hashObject.Pairs.TryGetValue(Key:((IHashable)index).HashKey()).Match(
+            None: NULL,
+            Some: x => x.Value
+        );
     }
     private IObject EvalArrayIndexExpression(IObject left, IObject index)
     {

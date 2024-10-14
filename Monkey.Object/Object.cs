@@ -20,6 +20,12 @@ public class ObjectType
     public const string STRING_OBJ = "STRING";
     public const string BUILTIN_OBJ = "BUILTIN";
     public const string ARRAY_OBJ = "ARRAY";
+    public const string HASH_OBJ = "HASH";
+}
+
+public interface IHashable
+{
+    public HashKey HashKey();
 }
 
 public class Error : IObject
@@ -43,7 +49,7 @@ public class ReturnValue : IObject
     public string Type() { return ObjectType.RETURN_VALUE_OBJ; }
     public string Inspect() { return Value.Inspect(); }
 }
-public class Integer : IObject
+public class Integer : IObject, IHashable
 {
     public Integer(long val)
     {
@@ -52,9 +58,13 @@ public class Integer : IObject
     public long value;
     public string Type() { return ObjectType.INTEGER_OBJ; }
     public string Inspect() { return value.ToString(); }
+    public HashKey HashKey()
+    {
+        return new(Type(), (ulong)value);
+    }
 }
 
-public class Boolean : IObject
+public class Boolean : IObject, IHashable
 {
     public Boolean(bool b)
     {
@@ -63,6 +73,19 @@ public class Boolean : IObject
     public bool value;
     public string Type() { return ObjectType.BOOLEAN_OBJ; }
     public string Inspect() { return value.ToString(); }
+    public HashKey HashKey()
+    {
+        ulong val;
+        if (value)
+        {
+            val = 1;
+        }
+        else
+        {
+            val = 0;
+        }
+        return new HashKey(Type(), val);
+    }
 }
 
 public class Null : IObject
@@ -98,7 +121,7 @@ public class Function : IObject
     }
 }
 
-public class String : IObject
+public class String : IObject, IHashable
 {
     public string Value;
 
@@ -108,6 +131,14 @@ public class String : IObject
     }
     public string Type() { return ObjectType.STRING_OBJ; }
     public string Inspect() { return Value; }
+    public HashKey HashKey()
+    {
+        var s1 = Value[..(Value.Length / 2)];
+        var s2 = Value[(Value.Length / 2)..];
+        var hash = (long)s1.GetHashCode() << 32 | (uint)s2.GetHashCode();
+        return new(Type(), (ulong)hash);
+
+    }
 }
 
 public class Builtin : IObject
@@ -141,6 +172,47 @@ public class Array : IObject
         Out.Append('[');
         Out.Append(Strings.Join(elements.ToArray(), ", "));
         Out.Append(']');
+        return Out.ToString();
+    }
+}
+
+public record HashKey
+{
+    string Type;
+    ulong Value;
+    public HashKey(string type, ulong val)
+    {
+        Type = type;
+        Value = val;
+    }
+}
+
+public record HashPair
+{
+    public IObject Key;
+    public IObject Value;
+}
+
+public class Hash : IObject
+{
+    public Dictionary<HashKey, HashPair> Pairs;
+    public Hash(Dictionary<HashKey, HashPair> pairs)
+    {
+        Pairs = pairs;
+    }
+    public string Type() { return ObjectType.HASH_OBJ; }
+    public string Inspect()
+    {
+        var Out = new StringBuilder();
+        var pairs = new List<string>();
+
+        foreach (var pair in Pairs)
+        {
+            pairs.Add($"{pair.Value.Key.Inspect()}: {pair.Value.Value.Inspect()}");
+        }
+        Out.Append('{');
+        Out.Append(Strings.Join(pairs.ToArray(), ", "));
+        Out.Append('}');
         return Out.ToString();
     }
 }

@@ -12,6 +12,16 @@ public static class MonkeyBuiltins
         Builtins.Add("last", new Builtin(Last));
         Builtins.Add("rest", new Builtin(Rest));
         Builtins.Add("push", new Builtin(Push));
+        Builtins.Add("puts", new Builtin(Puts));
+    }
+
+    private static IObject Puts(params IObject[] args)
+    {
+        foreach (var arg in args)
+        {
+            Console.WriteLine(arg.Inspect());
+        }
+        return new Null();
     }
 
     private static IObject Len(params IObject[] args)
